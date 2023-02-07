@@ -1,6 +1,6 @@
-Joseph Chen's projects
-Completed:
+#Joseph Chen's projects
+##Completed:
 - Wordle Solver
 - Pig Game
-In-Progress
+##In-Progress
 - Google Maps 
