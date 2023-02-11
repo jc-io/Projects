@@ -30,7 +30,6 @@ def dijkstra(self, start, end):
   """
   This function will find the shortest path from
   one city to another city.
-  This was adapted from Jeffery Bergamini from Lecture week 9
   """
   if start == end and start in self:
     return [start]
@@ -73,7 +72,7 @@ def dijkstra(self, start, end):
 
 def vertex_names(names):
   """
-  This function takes the file "/srv/datasets/e-roads/vertex_names.txt"
+  This function takes the file "vertex_names.txt"
   as an input and and turns it into a dictionary.
   key = node_number
   value = city name
@@ -82,7 +81,7 @@ def vertex_names(names):
   input_file = open(names)
 
   for line in input_file:
-    key, value = line.split("\t")
+    rand, key, value = line.split("\t")
     names_dict[int(key)] = value.strip()
 
   return names_dict
@@ -90,7 +89,7 @@ def vertex_names(names):
 
 def vertex_locations(locations, names):
   """
-  This function takes the file "/srv/datasets/e-roads/vertex_locations.txt"
+  This function takes the file "vertex_locations.txt"
   as an input and turns it into a dictionary.
   key = node_number
   value = {longitude, latitude}
@@ -99,7 +98,7 @@ def vertex_locations(locations, names):
   input_file = open(locations)
 
   for line in input_file:
-    number, long, lat = line.split()
+    rand, number, long, lat = line.split()
     loctions_dict[names[int(number)]] = [float(long), float(lat.strip())]
 
   return loctions_dict
@@ -107,7 +106,7 @@ def vertex_locations(locations, names):
 
 def network(net, names):
   """
-  This function takes the file "/srv/datasets/e-roads/network.txt"
+  This function takes the file "network.txt"
   as an input and turns it into a dictionary.
   key = node_number
   value = node
@@ -116,7 +115,7 @@ def network(net, names):
   input_file = open(net)
 
   for line in input_file:
-    key, value = line.split()
+    rand, key, value = line.split()
     network_list.append([names[int(key)], names[int(value.strip())]])
 
   return network_list
@@ -131,7 +130,7 @@ def reverse_network(net, names):
   input_file = open(net)
 
   for line in input_file:
-    key, value = line.split()
+    rand, key, value = line.split()
     network_list.append([names[int(value)], names[int(key.strip())]])
 
   return network_list
@@ -151,10 +150,10 @@ def haversine(src_lon, src_lat, dst_lon, dst_lat):
   return c * r
 
 
-vertex_names = vertex_names("/srv/datasets/e-roads/vertex_names.txt")
-vertex_locations = vertex_locations("/srv/datasets/e-roads/vertex_locations.txt", vertex_names)
-vertex_network = network("/srv/datasets/e-roads/network.txt", vertex_names)
-reverse = reverse_network("/srv/datasets/e-roads/network.txt", vertex_names)
+vertex_names = vertex_names("vertex_names.txt")
+vertex_locations = vertex_locations("vertex_locations.txt", vertex_names)
+vertex_network = network("network.txt", vertex_names)
+reverse = reverse_network("network.txt", vertex_names)
 bidirectional = vertex_network + reverse
 
 all_weight_list = []
